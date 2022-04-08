@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, session, redirect, url_for
 import datetime
 # FlASK
@@ -6,7 +7,6 @@ app = Flask(__name__)
 app.permanent_session_lifetime = datetime.timedelta(days=1)
 app.secret_key = "super secret key"
 #############################################################
-
 
 @app.route('/')
 def home():
