@@ -1,4 +1,8 @@
+from crypt import methods
+from urllib import request
 from flask import Flask, render_template
+
+
 
 # FlASK
 #############################################################
@@ -9,6 +13,14 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/prueba')
-def prueba():
-    return "<p>Soy una prueba2</p>"   
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if (request.method == "GET"):
+        return render_template("Login.html", data="email")
+    else:
+        email = None
+        email = request.form["email"]
+        password = request.form["password"]
+        return render_template("index.html", data=email)
+
