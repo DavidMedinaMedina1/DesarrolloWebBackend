@@ -21,10 +21,6 @@ cuentas = db.alumno
 #############################################################
 
 
-
-
-
-
 @app.route('/')
 def home():
     email = None
@@ -32,7 +28,7 @@ def home():
         email = session["email"]
         return render_template('index.html', data=email)
     else:
-        return render_template('Login.html', data=email)
+        return render_template('usuarios.html', data=email)
 
 
 @app.route('/signup')
