@@ -1,3 +1,38 @@
-{% for user in data %}
-  {{ user.name }} 
-{% end for %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Uusarios registrados</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<a class="nav-link" href="/"> Regresar a login</a>
+<a class="nav-link" href="/create"> Crear nuevo usuario </a>
+<body>
+    <table class="table">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Contraseña</th>
+
+        </tr>
+        {% for i in data %}
+        <form method="POST" action="/update">
+            <tr>
+
+                <td><input type="text" name="nombre" value="{{i.Nombre}}"></td>
+                <td><input type="text" name="edad" value="{{i.Edad}}"></td>
+                <td><input type="text" name="correo" value="{{i.Correo}}"></td>
+                <td><input type="password" name="contrasena" value="{{i.Contrasena}}"></td>
+                <td><button type="submit" class="btn btn-primary">Actualizar registro</button></td>
+        </form>
+        <td><a href="/delete/{{i.Correo}}"><button class="btn btn-primary">Eliminar registro</button></a></td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    </div>
+</body>
+
+</html>

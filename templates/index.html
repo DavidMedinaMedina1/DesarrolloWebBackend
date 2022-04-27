@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="static/src/style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
-    <title>Tiyanquiztli</title>
+    <title>Tiyanquiztli, {{error}}</title>
 </head>
 
 <body>
     <header class="header" id="inicio">
         <img src="static/img/hamburger.svg" alt="" class="hamburger" />
         <nav class="menu-navegacion">
+            <a href="/login">Log in</a>
             <a href="#inicio">Inicio</a>
-            <a href="/login">login</a>
             <a href="#servicio">Servicio</a>
             <a href="#catalogo">Catalogo</a>
             <a href="#expertos">Expertos</a>
             <a href="#contacto">Contacto</a>
-            <a href="/logout">logout</a>
+            <a href="/logout">Log out</a>
+
         </nav>
         <div class="contenedor head">
             <h1 class="titulo">
@@ -41,7 +42,7 @@
         <section class="contenedor" id="servicio">
             <h2 class="subtitulo">Nuestra propuesta</h2>
             <div class="contenedor-servicio">
-                <img src="static/img/checklist.svg" alt="" />
+                <img src="img/checklist.svg" alt="" />
 
                 <div class="checklist-servicio">
                     <div class="service">
@@ -112,7 +113,7 @@
     <footer id="contacto">
         <div class="contenedor footer-content">
             <div class="contact-us">
-                <h2 class="brand">{{data}}</h2>
+                <h2 class="brand">{{ error }}</h2>
                 <p>
                     Arturo Márquez / Humberto Carrillo / Andrés Reyes / Rubén Villalpando / David Medina
                 </p>
