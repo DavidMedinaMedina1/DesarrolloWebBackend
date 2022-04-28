@@ -1,3 +1,4 @@
+from email import message_from_string
 from http import client
 from flask import Flask, redirect, render_template, request, session, url_for
 import datetime
@@ -40,8 +41,11 @@ def home():
     else:
         return render_template('login.html', error = email)
 
+
+
 @app.route('/login', methods=['POST'])
 def login2Index():
+    nombre = ""
     email = request.form['email']
     password = request.form['password']
     session['email'] = email
@@ -51,11 +55,13 @@ def login2Index():
         users = []
         for doc in cursor:
             users.append(doc)
+        
         if len(users) == 0:
-   
-            return "<p>El correo %s nó existe o la contraseña es erronea</p>" % (email)
+            return  "<p>El correo %s no existe o la contraseña es incorrecta, regrese a la página anterior e intentelo nuevamente</p>" % (email)
         else:
-            return render_template('index.html', error=email)
+            
+            return render_template('index.html', error = users)
+            
     except Exception as e:
         return "%s" % e
     
