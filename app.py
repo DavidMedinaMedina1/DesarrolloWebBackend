@@ -5,6 +5,7 @@ import datetime
 import pymongo
 from sqlalchemy import false
 from decouple import config
+from twilio.rest import Client
 
 # FlASK
 #############################################################
@@ -22,6 +23,13 @@ db = client.Tizanyaki
 ####cuentas = db.usuario
 cuentas = db.usuario
 ##############################################################
+
+#Twilio
+#############################################################
+account_sid = config('account_sid')
+auth_token = config('auth_token')
+TwilioClient = Client(account_sid, auth_token)
+#############################################################
 
 ##############################################################
 #Configuración profesor
@@ -41,8 +49,6 @@ def home():
     else:
         return render_template('login.html', error = email)
 
-
-
 @app.route('/login', methods=['POST'])
 def login2Index():
     nombre = ""
@@ -59,9 +65,7 @@ def login2Index():
         if len(users) == 0:
             return  "<p>El correo %s no existe o la contraseña es incorrecta, regrese a la página anterior e intentelo nuevamente</p>" % (email)
         else:
-            
             return render_template('index.html', error = users)
-            
     except Exception as e:
         return "%s" % e
     
@@ -104,6 +108,15 @@ def insertUsers():
     }
     try:
         cuentas.insert_one(user)
+        #twilio
+        #########################################################
+        comogusten = TwilioClient.messages.create(
+             from_="whatsapp:+14155238886",
+             body= "El usuario %s se agregfó a tu página web" % (
+                 request.form["nombre"]),
+             to="whatsapp:+5215586862236"
+        )
+        #########################################################
         return redirect(url_for("usuarios"))
     except Exception as e:
          return "<p>El servicio no esta disponible =>: %s %s" % type(e), e
